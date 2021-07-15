@@ -219,7 +219,7 @@ for i in {0..1} ; do
     sslca
 done
 
-#Connect
+#replicator
 for i in {0..1} ; do
   generate_certificate \
     replicator-${i} \
