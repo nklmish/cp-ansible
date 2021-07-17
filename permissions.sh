@@ -157,6 +157,18 @@ confluent iam rolebinding create \
   --principal User:replicator \
   --role ResourceOwner
 
+# test permissions for replicating the traffic
+confluent iam rolebinding create \
+  --kafka-cluster-id $KAFKA_ID \
+  --resource Topic:replicator-test-source \
+  --principal User:replicator \
+  --role ResourceOwner
+confluent iam rolebinding create \
+  --kafka-cluster-id $KAFKA_ID \
+  --resource Topic:replicator-test-target \
+  --principal User:replicator \
+  --role ResourceOwner
+
 # See:
 # https://docs.confluent.io/platform/current/security/rbac/rbac-predefined-roles.html
 
