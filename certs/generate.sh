@@ -188,7 +188,7 @@ for i in {0..2} ; do
   generate_certificate \
     broker-${i} \
     "/C=DE/O=Siemens/OU=demo-org-unit/CN=broker-${i}" \
-    "subjectAltName=DNS:broker-${i},DNS:broker-${i}.demodomain,DNS:kafka.demo.siemens.kafka.confluent.io,DNS:b-${i}.kafka.demo.siemens.kafka.confluent.io\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth" \
+    "subjectAltName=DNS:broker-${i},DNS:broker-${i}.demodomain,DNS:kafka.siemens.kafka.confluent.io,DNS:b-${i}.kafka.siemens.kafka.confluent.io\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth" \
     sslca
 done
 
@@ -197,7 +197,7 @@ for i in {0..1} ; do
   generate_certificate \
     registry-${i} \
     "/C=DE/O=Siemens/OU=demo-org-unit/CN=registry-${i}" \
-    "subjectAltName=DNS:registry-${i},DNS:registry-${i}.demodomain,DNS:registry.demo.siemens.kafka.confluent.io\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth" \
+    "subjectAltName=DNS:registry-${i},DNS:registry-${i}.demodomain,DNS:registry.siemens.kafka.confluent.io\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth" \
     sslca
 done
 
@@ -206,7 +206,7 @@ for i in {0..0} ; do
   generate_certificate \
     c3-${i} \
     "/C=DE/O=Siemens/OU=demo-org-unit/CN=c3-${i}" \
-    "subjectAltName=DNS:c3-${i},DNS:c3-${i}.demodomain,DNS:c3.demo.siemens.kafka.confluent.io\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth" \
+    "subjectAltName=DNS:c3-${i},DNS:c3-${i}.demodomain,DNS:c3.siemens.kafka.confluent.io\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth" \
     sslca
 done
 
@@ -215,7 +215,7 @@ for i in {0..1} ; do
   generate_certificate \
     connect-${i} \
     "/C=DE/O=Siemens/OU=demo-org-unit/CN=connect-${i}" \
-    "subjectAltName=DNS:connect-${i},DNS:connect-${i}.demodomain,DNS:connect.demo.siemens.kafka.confluent.io\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth" \
+    "subjectAltName=DNS:connect-${i},DNS:connect-${i}.demodomain,DNS:connect.siemens.kafka.confluent.io\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth" \
     sslca
 done
 
@@ -224,6 +224,6 @@ for i in {0..1} ; do
   generate_certificate \
     replicator-${i} \
     "/C=DE/O=Siemens/OU=demo-org-unit/CN=replicator-${i}" \
-    "subjectAltName=DNS:replicator-${i},DNS:replicator-${i}.demodomain,DNS:replicator.demo.siemens.kafka.confluent.io\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth" \
+    "subjectAltName=DNS:replicator-${i},DNS:replicator-${i}.demodomain,DNS:replicator.siemens.kafka.confluent.io\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth" \
     sslca
 done
