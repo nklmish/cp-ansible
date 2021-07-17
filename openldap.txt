@@ -1,0 +1,148 @@
+ldapadd -H ldapi:/// -f /etc/openldap/schema/cosine.ldif
+ldapadd -H ldapi:/// -f /etc/openldap/schema/nis.ldif 
+ldapadd -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
+
+
+ldapmodify -Y EXTERNAL -H ldapi:/// <<EOF
+dn: olcDatabase={2}mdb,cn=config
+changetype: modify
+replace: olcSuffix
+olcSuffix: dc=siemens,dc=local
+
+dn: olcDatabase={2}mdb,cn=config
+changetype: modify
+replace: olcRootDN
+olcRootDN: cn=ldapadm,dc=siemens,dc=local
+
+dn: olcDatabase={2}mdb,cn=config
+changetype: modify
+replace: olcRootPW
+olcRootPW: $(slappasswd -h {SSHA} -s bdeByxY955DYW)
+EOF
+
+ldapmodify -Y EXTERNAL -H ldapi:/// <<EOF
+dn: olcDatabase={1}monitor,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: {0}to * 
+  by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" read 
+  by dn.base="cn=ldapadm,dc=siemens,dc=local" read
+  by * none
+olcAccess: {1}to dn.subtree="dc=siemens,dc=local"
+  by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" write
+  by dn.base="cn=ldapadm,dc=siemens,dc=local" write
+EOF
+
+echo -n bdeByxY955DYW > ~/.ldappasswd
+
+ldapadd -H ldapi:/// -D cn=ldapadm,dc=siemens,dc=local -y ~/.ldappasswd <<EOF
+
+dn: dc=siemens,dc=local
+dc: siemens
+o: Siemens demo
+objectclass: organization
+objectclass: dcObject
+
+dn: ou=users,dc=siemens,dc=local
+objectClass: organizationalUnit
+ou: users
+
+dn: ou=services,dc=siemens,dc=local
+objectClass: organizationalUnit
+ou: services
+
+dn: ou=groups,dc=siemens,dc=local
+objectClass: organizationalUnit
+ou: groups
+
+EOF
+
+
+ldapadd -H ldapi:/// -D cn=ldapadm,dc=siemens,dc=local -y ~/.ldappasswd <<EOF
+
+dn: cn=probe,ou=services,dc=siemens,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: probe
+userPassword: $(slappasswd -h {SHA} -s l9ioN07V)
+
+dn: cn=mds,ou=services,dc=siemens,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: mds
+userPassword: $(slappasswd -h {SHA} -s 7Hr5ERRu)
+
+dn: cn=kafka,ou=services,dc=siemens,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: kafka
+userPassword: $(slappasswd -h {SHA} -s KJ7Xk8fq)
+
+dn: cn=registry,ou=services,dc=siemens,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: registry
+userPassword: $(slappasswd -h {SHA} -s 11vqv6X3)
+
+dn: cn=connect,ou=services,dc=siemens,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: connect
+userPassword: $(slappasswd -h {SHA} -s G4X3sBtJ)
+
+dn: cn=replicator,ou=services,dc=siemens,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: replicator
+userPassword: $(slappasswd -h {SHA} -s sPD38V5O)
+
+dn: cn=ccc,ou=services,dc=siemens,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: ccc
+userPassword: $(slappasswd -h {SHA} -s C2apzg19)
+
+EOF
+
+
+
+
+ldapadd -D cn=ldapadm,dc=siemens,dc=local -y ~/.ldappasswd <<EOF
+dn: cn=sarah,ou=users,dc=siemens,dc=local
+objectClass: top
+objectClass: person
+cn: sarah
+sn: Sarah
+userPassword: $(slappasswd -h {SHA} -s ZFggjkMe)
+
+dn: cn=tommy,ou=users,dc=siemens,dc=local
+objectClass: top
+objectClass: person
+cn: tommy
+sn: Tommy
+userPassword: $(slappasswd -h {SHA} -s aO1TJ8k3)
+
+dn: cn=agnes,ou=users,dc=siemens,dc=local
+objectClass: top
+objectClass: person
+cn: agnes
+sn: Agnes
+userPassword: $(slappasswd -h {SHA} -s 8Lmlp6Hp)
+
+dn: cn=roger,ou=users,dc=siemens,dc=local
+objectClass: top
+objectClass: person
+cn: roger
+sn: Roger
+userPassword: $(slappasswd -h {SHA} -s pCmWn912)
+
+EOF
+
+ldapadd -D cn=ldapadm,dc=siemens,dc=local -y ~/.ldappasswd <<EOF
+dn: cn=admins,ou=groups,dc=siemens,dc=local
+cn: admins
+objectClass: groupOfNames
+member: cn=sarah,ou=users,dc=siemens,dc=local
+member: cn=tommy,ou=users,dc=siemens,dc=local
+EOF
+
