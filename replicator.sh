@@ -45,7 +45,10 @@ curl -k \
   "dest.kafka.sasl.jaas.config": "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required username=\"replicator\" password=\"sPD38V5O\" metadataServerUrls=\"https://broker-0.demodomain:8090,https://broker-1.demodomain:8090,https://broker-2.demodomain:8090\";",
   "dest.kafka.sasl.login.callback.handler.class": "io.confluent.kafka.clients.plugins.auth.token.TokenUserLoginCallbackHandler",
   "dest.kafka.ssl.truststore.location": "/var/ssl/private/kafka_connect.truststore.jks",
-  "dest.kafka.ssl.truststore.password": "confluenttruststorepass"
+  "dest.kafka.ssl.truststore.password": "confluenttruststorepass",
+
+  "principal.service.name": "replicator",
+  "principal.service.password": "sPD38V5O"
 
 }
 EOF
