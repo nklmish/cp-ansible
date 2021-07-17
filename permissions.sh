@@ -4,7 +4,7 @@ KAFKA_ID=$(curl -ks https://kafka.siemens.ps.confluent.io:8090/v1/metadata/id | 
 
 CONFLUENT_USERNAME=mds \
 CONFLUENT_PASSWORD=7Hr5ERRu \
-CONFLUENT_MDS_URL=https://kafka.siemens.ps.confluent.io:8090/v1/metadata/id \
+CONFLUENT_MDS_URL=https://kafka.siemens.ps.confluent.io:8090 \
 CONFLUENT_CA_CERT_PATH=certs/sslca.pem \
 confluent login
 
