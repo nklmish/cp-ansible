@@ -117,6 +117,12 @@ confluent iam rolebinding create \
 
 confluent iam rolebinding create \
   --kafka-cluster-id $KAFKA_ID \
+  --resource Group:replicator \
+  --principal User:replicator \
+  --role ResourceOwner
+
+confluent iam rolebinding create \
+  --kafka-cluster-id $KAFKA_ID \
   --resource Topic:_confluent-replicator-configs \
   --principal User:replicator \
   --role ResourceOwner
